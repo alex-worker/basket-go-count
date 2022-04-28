@@ -17,6 +17,6 @@ RUN make go-build
 
 FROM alpine:latest
 WORKDIR /app
-COPY --from=builder /app/main /app/habra-tm-habr
+COPY --from=builder /app/main /app/basket-go-count
 
-CMD /app/habra-tm-habr
+CMD /app/basket-go-count

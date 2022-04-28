@@ -26,3 +26,6 @@ go-test:
 
 docker-dev-up:
 	docker-compose --file ./docker/development/docker-compose.yml up
+
+docker-test-up:
+	docker-compose --file ./docker/testing/docker-compose.yml up
