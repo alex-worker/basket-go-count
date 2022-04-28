@@ -1,0 +1,12 @@
+version: '2'
+services:
+
+  postgres:
+    image: postgres:14.2-alpine
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: 'trust'
+    tmpfs: '/var/lib/postgresql/data'
+    ports:
+      - "5432:5432"
+    volumes:
+      - ../../db/init.sql:/docker-entrypoint-initdb.d/init.sql

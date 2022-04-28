@@ -1,13 +1,5 @@
 version: '2'
 services:
-#  habra-tm-habr:
-#      image: habra-tm-habr:rc1
-#      build:
-#        context: ../
-#        dockerfile: ./docker/Dockerfile
-#      ports:
-#        - "8081:8080"
-#        - "9091:9090"
 
   postgres:
     image: postgres:14.2-alpine
@@ -18,5 +10,3 @@ services:
       - "5432:5432"
     volumes:
       - ../db/init.sql:/docker-entrypoint-initdb.d/init.sql
-#    logging:
-#      driver: 'none'

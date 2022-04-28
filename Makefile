@@ -1,6 +1,6 @@
 build: go-clean go-build
 
-up: docker-up
+up: docker-dev-up
 
 run: build go-run
 
@@ -21,8 +21,8 @@ go-run:
 go-test:
 	go test -v ./...
 
-docker-build:
-	docker-compose --file ./docker/docker-compose.yml build --force
+#docker-build:
+#	docker-compose --file ./docker/docker-compose.yml build --force
 
-docker-up:
-	docker-compose --file ./docker/docker-compose.yml up
+docker-dev-up:
+	docker-compose --file ./docker/development/docker-compose.yml up
