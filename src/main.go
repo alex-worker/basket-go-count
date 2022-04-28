@@ -2,7 +2,7 @@ package main
 
 import (
 	"basket-go-count/src/config"
-	"basket-go-count/src/informator"
+	"basket-go-count/src/database"
 	_ "github.com/lib/pq"
 	"log"
 )
@@ -15,18 +15,18 @@ func main() {
 	connStr := config.ReadConnectionString()
 	log.Println("URI:", connStr)
 
-	myInformator := informator.New()
+	myDatabase := database.New()
 
-	err := myInformator.Connect(connStr)
+	err := myDatabase.Connect(connStr)
 	if err != nil {
 		log.Fatal(err)
 		return
 	}
-	defer myInformator.Close()
+	defer myDatabase.Close()
 
 	log.Println("Connect ok")
 
-	records, err := myInformator.CalcSeasonRecords()
+	records, err := myDatabase.CalcSeasonRecords()
 	if err != nil {
 		log.Fatal(err)
 	}

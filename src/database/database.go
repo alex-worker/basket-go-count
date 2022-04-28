@@ -1,28 +1,29 @@
-package informator
+package database
 
 import (
+	"basket-go-count/src/database/requests"
 	"database/sql"
 	"errors"
 	"log"
 )
 
-type Informator struct {
+type Database struct {
 	db *sql.DB
 }
 
-type IInformator interface {
+type IDatabase interface {
 	Connect(uri string) error
 	Close()
-	CalcSeasonRecords() (SeasonRecords, error)
+	CalcSeasonRecords() (requests.SeasonRecords, error)
 }
 
-func New() IInformator {
-	return &Informator{
+func New() IDatabase {
+	return &Database{
 		db: nil,
 	}
 }
 
-func (i *Informator) Connect(uri string) error {
+func (i *Database) Connect(uri string) error {
 	db, err := sql.Open("postgres", uri)
 	if err != nil {
 		return err
@@ -31,7 +32,7 @@ func (i *Informator) Connect(uri string) error {
 	return nil
 }
 
-func (i *Informator) Close() {
+func (i *Database) Close() {
 	log.Print("Close db...")
 	if i.db == nil {
 		return
@@ -42,9 +43,9 @@ func (i *Informator) Close() {
 	}
 }
 
-func (i *Informator) CalcSeasonRecords() (SeasonRecords, error) {
+func (i *Database) CalcSeasonRecords() (requests.SeasonRecords, error) {
 	if i.db == nil {
 		return nil, errors.New("not connected")
 	}
-	return DoSeasonRecordsCount(i.db)
+	return requests.DoSeasonRecordsCount(i.db)
 }

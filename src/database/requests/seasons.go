@@ -1,4 +1,4 @@
-package informator
+package requests
 
 import "database/sql"
 
