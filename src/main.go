@@ -31,5 +31,9 @@ func main() {
 		log.Fatal(err)
 	}
 
-	log.Print(records)
+	for _, record := range records {
+		log.Printf(" %v %v %v", record.Season, record.IsUSA, record.Count)
+	}
+
+	log.Println("Bye-bue, cruel world!...")
 }

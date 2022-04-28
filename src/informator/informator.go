@@ -13,9 +13,9 @@ const QuerySQL = `
 `
 
 type SeasonRecord struct {
-	season string
-	isUSA  string
-	count  int
+	Season string
+	IsUSA  string
+	Count  int
 }
 
 type SeasonRecords []SeasonRecord
