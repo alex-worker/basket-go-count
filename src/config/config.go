@@ -7,7 +7,7 @@ import (
 const connectionStringName = "DATABASE_CONNECTION"
 const defaultConnectString = "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable"
 
-func Read() {
+func Init() {
 	viper.SetDefault("db.uri", defaultConnectString)
 	err := viper.BindEnv(connectionStringName)
 	if err != nil {

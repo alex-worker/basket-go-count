@@ -3,59 +3,33 @@ package main
 import (
 	"basket-go-count/src/config"
 	"basket-go-count/src/informator"
-	"database/sql"
-	"fmt"
 	_ "github.com/lib/pq"
 	"log"
 )
 
-type record struct {
-	season string
-	isUSA  string
-	count  int
-}
-
 func main() {
 
-	config.Read()
-
-	//log.Println("Hello world! Lets go calculating...")
-	//log.Println("Connect..")
+	log.Println("Hello world! Lets go calculating...")
+	config.Init()
 
 	connStr := config.ReadConnectionString()
-
 	log.Println("URI:", connStr)
 
-	db, err := sql.Open("postgres", connStr)
+	myInformator := informator.New()
+
+	err := myInformator.Connect(connStr)
 	if err != nil {
 		log.Fatal(err)
 		return
 	}
-	defer informator.CloseDb(db)
+	defer myInformator.Close()
 
 	log.Println("Connect ok")
 
-	rows, err := db.Query(informator.QuerySQL)
-
-	log.Printf("%T", err)
-
+	records, err := myInformator.CalcSeasonRecords()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	for rows.Next() {
-		p := record{}
-		err := rows.Scan(&p.season, &p.isUSA, &p.count)
-		switch err {
-		case sql.ErrNoRows:
-			fmt.Println("Empty result!")
-			return
-		case nil:
-			fmt.Printf("%v %v %v\n", p.season, p.isUSA, p.count)
-		default:
-			log.Fatal(err)
-		}
-	}
-
-	informator.CloseRows(rows)
+	log.Print(records)
 }
