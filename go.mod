@@ -2,12 +2,7 @@ module basket-go-count
 
 go 1.18
 
-require github.com/lib/pq v1.10.5 // indirect
-
-require (
-	github.com/lib/pq v1.10.5
-	github.com/spf13/viper v1.11.0
-)
+require github.com/spf13/viper v1.11.0
 
 require (
 	github.com/fsnotify/fsnotify v1.5.1 // indirect
