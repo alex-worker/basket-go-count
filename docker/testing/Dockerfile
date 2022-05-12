@@ -16,7 +16,12 @@ RUN make go-build
 #ENTRYPOINT ["tail", "-f", "/dev/null"]
 
 FROM alpine:latest
+RUN apk add bash
 WORKDIR /app
 COPY --from=builder /app/main /app/basket-go-count
 
-CMD /app/basket-go-count
+COPY ./testing/* ./
+
+#CMD ls /app/*
+CMD ./test.sh
+#CMD /app/basket-go-count

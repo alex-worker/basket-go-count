@@ -1,4 +1,4 @@
 #!/bin/bash
 set -e
 
-./tcp-port-wait.sh localhost 5432
+./tcp-port-wait.sh postgres 5432

@@ -4,7 +4,7 @@ up: docker-dev-up
 
 run: build go-run
 
-test: build go-test
+test: build go-test docker-test-up
 
 clean: go-clean
 
@@ -21,11 +21,9 @@ go-run:
 go-test:
 	go test -v ./...
 
-#docker-build:
-#	docker-compose --file ./docker/docker-compose.yml build --force
-
 docker-dev-up:
 	docker-compose --file ./docker/development/docker-compose.yml up
 
 docker-test-up:
-	docker-compose --file ./docker/testing/docker-compose.yml up
+	docker-compose --file ./docker/testing/docker-compose.yml build --force
+	docker-compose --file ./docker/testing/docker-compose.yml up --abort-on-container-exit
