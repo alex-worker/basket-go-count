@@ -1,4 +1,12 @@
 #!/bin/bash
 set -e
 
-./tcp-port-wait.sh postgres 5432
+function main() {
+  DB_HOST=$1
+  DB_PORT=$2
+  # shellcheck disable=SC2086
+  ./tcp-port-wait.sh $DB_HOST "$DB_PORT"
+}
+
+echo "$DB_HOST" "$DB_PORT"
+main "$DB_HOST" "$DB_PORT"
