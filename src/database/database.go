@@ -4,6 +4,7 @@ import (
 	"basket-go-count/src/database/requests"
 	"database/sql"
 	"errors"
+	_ "github.com/lib/pq"
 	"log"
 )
 
