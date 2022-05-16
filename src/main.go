@@ -7,6 +7,7 @@ import (
 )
 
 func main() {
+	log.Println("Hello world!")
 
 	config.Init()
 	connString := config.ReadConnectionString()
@@ -25,7 +26,13 @@ func main() {
 		return
 	}
 
-	log.Println(records)
+	log.Println("+---------+--------+---------+")
+	log.Println("| Season  | isUsa  | Players |")
+	log.Println("+---------+--------+---------+")
 
-	log.Println("Hello world")
+	for _, value := range records {
+		log.Printf("| %7v | %6v | %7v |", value.Season, value.IsUSA, value.Count)
+	}
+
+	log.Println("Good bye, cruel world")
 }
