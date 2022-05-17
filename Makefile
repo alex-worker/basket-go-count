@@ -20,7 +20,7 @@ go-run:
 	go run ./src/main.go
 
 go-test:
-	go test -v ./...
+	go test -v ./src/...
 
 docker-dev-up:
 	docker-compose --file ./docker/development/docker-compose.yml up
