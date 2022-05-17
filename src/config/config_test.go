@@ -4,6 +4,7 @@ import (
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 	"os"
+	"syreclabs.com/go/faker"
 	"testing"
 )
 
@@ -15,7 +16,7 @@ func Test_Init(t *testing.T) {
 }
 
 func Test_ReadConnectionString(t *testing.T) {
-	expected := "100500"
+	expected := faker.RandomString(faker.RandomInt(10, 20))
 	err := os.Setenv(connectionStringName, expected)
 	if err != nil {
 		t.Fatal(err)

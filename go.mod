@@ -6,6 +6,7 @@ require (
 	github.com/lib/pq v1.10.5
 	github.com/spf13/viper v1.11.0
 	github.com/stretchr/testify v1.7.1
+	syreclabs.com/go/faker v1.2.3
 )
 
 require (
