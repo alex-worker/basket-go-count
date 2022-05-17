@@ -4,7 +4,8 @@ up: docker-dev-up
 
 run: build go-run
 
-test: build go-test docker-test-up
+test: go-test
+#docker-test-up
 
 clean: go-clean
 

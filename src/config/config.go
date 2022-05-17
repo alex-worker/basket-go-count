@@ -8,7 +8,7 @@ const connectionStringName = "DATABASE_CONNECTION"
 const defaultConnectString = "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable"
 
 func Init() {
-	viper.SetDefault("db.uri", defaultConnectString)
+	viper.SetDefault(connectionStringName, defaultConnectString)
 	err := viper.BindEnv(connectionStringName)
 	if err != nil {
 		panic(error.Error)
@@ -16,5 +16,5 @@ func Init() {
 }
 
 func ReadConnectionString() string {
-	return viper.GetString("db.uri")
+	return viper.GetString(connectionStringName)
 }
