@@ -2,7 +2,8 @@ package main
 
 import (
 	"basket-go-count/src/config"
-	"basket-go-count/src/database"
+	"basket-go-count/src/context"
+	"basket-go-count/src/requests"
 	"log"
 )
 
@@ -12,16 +13,15 @@ func main() {
 	config.Init()
 	connString := config.ReadConnectionString()
 
-	myDb := database.New()
+	ctx, err := context.NewContext(connString)
 
-	err := myDb.Connect(connString)
 	if err != nil {
 		panic(err)
 	}
 
-	defer myDb.Close()
+	defer ctx.Close()
 
-	records, err := myDb.CalcSeasonRecords()
+	records, err := requests.DoSeasonRecordsCount(ctx.GetDb())
 	if err != nil {
 		return
 	}
