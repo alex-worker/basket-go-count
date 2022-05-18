@@ -7,6 +7,8 @@ import (
 	"testing"
 )
 
+const defaultConnectString = "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable"
+
 func TestMain(m *testing.M) {
 	// Write code here to run before tests
 
@@ -19,11 +21,18 @@ func TestMain(m *testing.M) {
 	os.Exit(exitVal)
 }
 
-func TestNewContext_Error(t *testing.T) {
+func TestNewContext(t *testing.T) {
 	connString := faker.RandomString(10)
+
 	ctx, err := NewContext(connString)
 	assert.Nil(t, ctx)
 	assert.NotNil(t, err)
+
+	ctx, err = NewContext(defaultConnectString)
+	assert.Nil(t, err)
+	assert.NotNil(t, ctx)
+
+	ctx.Close()
 }
 
 func TestContext_Close(t *testing.T) {
