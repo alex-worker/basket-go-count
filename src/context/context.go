@@ -37,4 +37,5 @@ func (ctx *Context) Close() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	ctx.db = nil
 }
