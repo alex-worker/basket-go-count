@@ -15,6 +15,10 @@ func NewContext(uri string) (*Context, error) {
 	if err != nil {
 		return nil, err
 	}
+	err = db.Ping()
+	if err != nil {
+		return nil, err
+	}
 	return &Context{
 		db,
 	}, nil
