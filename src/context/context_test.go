@@ -45,4 +45,8 @@ func TestContext_GetDb(t *testing.T) {
 	ctx = Context{db: mocks.Connect()}
 	actual = ctx.GetDb()
 	assert.Equal(t, ctx.db, actual)
+
+	ctx.Close()
+	actual = ctx.GetDb()
+	assert.Nil(t, actual)
 }
