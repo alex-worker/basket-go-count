@@ -1,22 +1,19 @@
 package requests
 
 import (
-	"os"
+	"basket-go-count/src/mocks"
 	"testing"
 )
 
-func TestMain(m *testing.M) {
-	// Write code here to run before tests
-
-	// Run tests
-	exitVal := m.Run()
-
-	// Write code here to run after tests
-
-	// Exit with exit value from tests
-	os.Exit(exitVal)
-}
-
 func TestDoSeasonRecordsCount(t *testing.T) {
-
+	conn := mocks.Connect()
+	count, err := DoSeasonRecordsCount(conn)
+	if err != nil {
+		t.Error(err)
+	}
+	t.Log(count)
+	err = conn.Close()
+	if err != nil {
+		t.Error(err)
+	}
 }

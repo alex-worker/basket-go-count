@@ -1,6 +1,9 @@
 package mocks
 
-import "database/sql"
+import (
+	"database/sql"
+	_ "github.com/lib/pq"
+)
 
 //func GetSQL_DB() *sql.DB {
 //	db, err := sql.Open("postgres", GetConnectionString())
