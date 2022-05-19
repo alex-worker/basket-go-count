@@ -1,5 +1,5 @@
 FROM golang:1.18-alpine AS builder
-RUN apk add bash
+RUN apk add bash g++
 #RUN apk add make
 
 WORKDIR /app
@@ -21,7 +21,6 @@ COPY ./src ./src
 #COPY --from=builder /app/main /app/basket-go-count
 
 COPY ./utils/* ./
-COPY ./testing/* ./testing
 
 ENV DB_HOST=postgres
 ENV DB_PORT=5432

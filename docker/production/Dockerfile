@@ -21,7 +21,6 @@ WORKDIR /app
 COPY --from=builder /app/main /app/basket-go-count
 
 COPY ./utils/* ./
-COPY ./testing/* ./
 
 ENV DB_HOST=postgres
 ENV DB_PORT=5432

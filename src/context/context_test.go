@@ -1,34 +1,19 @@
 package context
 
 import (
+	"basket-go-count/src/mocks"
 	"github.com/stretchr/testify/assert"
-	"os"
-	"syreclabs.com/go/faker"
 	"testing"
 )
 
-const defaultConnectString = "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable"
-
-func TestMain(m *testing.M) {
-	// Write code here to run before tests
-
-	// Run tests
-	exitVal := m.Run()
-
-	// Write code here to run after tests
-
-	// Exit with exit value from tests
-	os.Exit(exitVal)
-}
-
 func TestNewContext(t *testing.T) {
-	connString := faker.RandomString(10)
+	fakeConnString := mocks.GetConnectionString()
 
-	ctx, err := NewContext(connString)
+	ctx, err := NewContext(fakeConnString)
 	assert.Nil(t, ctx)
 	assert.NotNil(t, err)
 
-	ctx, err = NewContext(defaultConnectString)
+	ctx, err = NewContext(mocks.GetConnectionStringRealDb())
 	assert.Nil(t, err)
 	assert.NotNil(t, ctx)
 
@@ -36,9 +21,24 @@ func TestNewContext(t *testing.T) {
 }
 
 func TestContext_Close(t *testing.T) {
+	ctx := Context{db: nil}
+	ctx.Close() // we should not fail if db is nil
 
+	ctx = Context{db: mocks.Connect()}
+	ctx.Close()
+	assert.Nil(t, ctx.db)
+
+	ctx = Context{db: mocks.Connect()}
+	err := ctx.db.Ping()
+	if err != nil {
+		t.Error(err)
+	}
+	ctx.Close()
+	assert.Nil(t, ctx.db)
 }
 
 func TestContext_GetDb(t *testing.T) {
-
+	ctx := Context{db: nil}
+	actual := ctx.GetDb()
+	assert.Nil(t, actual)
 }
